@@ -1,0 +1,186 @@
+<app-nav-menu> </app-nav-menu>
+<!-- BEGIN: Content-->
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="content-wrapper">
+      <div class="row">
+          <div class="col-xl-12 col-md-12 col-12">
+              <div class="content-header row">
+                  
+                  <div class="content-header-left col-12  mt-1">
+                      <div class="row breadcrumbs-top">
+                          <div class="col-lg-6 col-md-12 col-12">
+                              <div class="row">
+                                  <div class="col-lg-4 col-md-6 col-12 pr-0 ">
+                                      <h5 class="content-header-title pr-1 mb-sm-5">Customer List</h5>
+                                  </div>
+                                  <div class="col-lg-8 col-md-6 col-12">
+                                      <form (ngSubmit)="SearchCustomer()">
+                                        <fieldset class="form-group position-relative has-icon-left">
+                                            <input  name="searchKeyWord"  [(ngModel)]="searchKeyWord" type="search" class="form-control modified-input"  placeholder="Search for a customer">
+                                            <div class="form-control-position">
+                                                <i class="bx bx-search"></i>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                  </div>
+                              </div>
+
+                          </div>
+                              <div class="col-lg-6 col-md-12 col-12">
+                                 <div class="row">
+                                     <div class="col-lg-1 col-md-12 col-12"></div>
+                                     <div class="col-lg-6 col-md-6 col-6 pr-0 ">
+                                         <a [routerLink]="[ '/new-customer']"  class="btn btn-modified2 btn-yellow btn-block mr-1 mb-1 text-center"><i class="bx bx-plus"></i><span class="align-middle ml-25">Add Customer</span></a>
+
+                                     </div>
+                                     <div class="col-lg-5 col-md-6 col-6  text-right">
+                                         <a  [routerLink]="[ '/retrieve-customers']" class="btn btn-block btn-violet btn-modified2 text-center round mr-1 mb-1"> Retrieve Customer </a>
+
+                                     </div>
+                                 </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              <div class="content-body">
+                  <!-- table Transactions start -->
+                  <section id="table-transactions">
+                      <div class="card">
+
+                        <div class="row mt-3">
+
+                            <div *ngIf="errors.length > 0" class="alert alert-danger" role="alert">
+                                <strong>Oops!</strong> 
+                                <span  *ngFor="let item of errors" > <br>   {{item}}</span>
+                            </div>
+
+                            <div *ngIf="success.length > 0" class="alert" role="alert alert-success">
+                                <strong>Success!</strong> 
+                                <span  *ngFor="let item of success" > <br>   {{item}}</span>
+                            </div>
+
+                        </div>
+                          <!-- datatable start -->
+                          <div class="card-body">
+                              <div class="">
+                                  <table id="table-extended-transactions" class="table mb-0 modifiedTable">
+                                      <thead>
+                                      <tr>
+                                        <th><h6 style="color: #ea6309 !important;">UserName</h6></th>
+                                        <th><h6 style="color: #ea6309 !important;">FirstName</h6></th>
+                                        <th><h6 style="color: #ea6309 !important;">LastName</h6></th>
+                                        <th><h6 style="color: #ea6309 !important;">Photo</h6></th>
+                                        <th><h6 style="color: #ea6309 !important;">PhoneNumber</h6></th>
+                                        <th><h6 style="color: #ea6309 !important;">Date Added</h6></th>
+                                          <th class="hidden-xs no-sort"></th>
+                                      </tr>
+                                      </thead>
+                                      
+                                      <tbody>
+                                        <tr *ngFor="let hero of list ; let i = index;">
+                                            <td class="hidden-xs"><h6> {{list[i].UserName}}</h6></td>
+                                            <td><h6 >{{list[i].FirstName}}</h6></td>
+                                            <td><h6>{{list[i].LastName}}</h6></td>
+                                            <td class="hidden-xs">  <a target="new" href="{{list[i].PicturePathOrUrl}}">{{list[i].PicturePathOrUrl}} </a> </td>
+                                            <td><h6>{{list[i].PhoneNumber}}</h6></td>
+                                            <td><span class="badge badge-pill badge-light-success"><h6>{{list[i].DateCreated}}</h6></span></td>
+                                            <td class="hidden-xs">
+                                                <div class="row">
+                                                    
+                                                    <div  class="col-3" (click)="sendAdminComment(list[i].UserId)">
+                                                        <a title="Send Admin Comment" href="#" > 
+                                                            <div   class="action-icon">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                                                    <path d="M7 9h10v1h-10v-1zm10-4h-10v1h10v-1zm-1 3v-1h-8v1h8zm-6.254 11.359c-.154 1.534-.68 2.685-1.746 3.796.428.053.975-.047 1.416-.28.159.318.326.715.384 1.125 1.005-1.149 1.633-2.527 1.867-4.035-.472-.091-.617-.248-.984-.499-.383 0-.686-.037-.937-.107zm2.692-.497c-.13.092-.284.138-.438.138s-.308-.046-.438-.138c-.625-.439-.49-.397-1.265-.395h-.002c-.322 0-.608-.2-.706-.495-.236-.709-.156-.599-.781-1.033-.197-.136-.308-.354-.308-.578l.037-.222c.242-.705.242-.569 0-1.277l-.037-.223c0-.225.111-.441.309-.578.625-.434.544-.324.781-1.033.098-.296.384-.495.706-.495h.002c.772.002.636.047 1.265-.395.129-.092.283-.138.437-.138s.308.046.438.137c.625.439.49.397 1.265.395h.001c.323 0 .609.199.708.495.236.708.153.598.781 1.033.196.137.308.354.308.578l-.037.223c-.241.705-.242.569 0 1.277l.037.223c0 .225-.111.441-.308.578-.628.435-.545.325-.781 1.033-.099.295-.385.495-.708.495h-.001c-.775-.002-.641-.043-1.265.395zm-.438-1.612c.967 0 1.75-.784 1.75-1.75s-.783-1.75-1.75-1.75-1.75.784-1.75 1.75.783 1.75 1.75 1.75zm1.317 2.216c-.368.253-.521.41-.983.499.234 1.508.862 2.886 1.866 4.036.058-.41.225-.807.384-1.125.441.232.988.333 1.416.28-1.064-1.109-1.584-2.266-1.739-3.797-.252.069-.556.107-.944.107zm-11.317-19.466v21h5c-.168-1.417-.56-3.607-3-4.578v-11.844c1.151-.504 2.074-1.427 2.578-2.578h10.844c.504 1.151 1.427 2.074 2.578 2.578v11.844c-2.44.971-2.832 3.161-3 4.578h5v-21h-20z"/></svg>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <a href="{{service.dir}}/customer-details?id={{list[i].UserId}}"> 
+                                                        <div   class="action-icon">
+                                                            <svg id="folder" xmlns="http://www.w3.org/2000/svg" width="13.884" height="13.037" viewBox="0 0 13.884 13.037">
+                                                                <path id="Path_2055" data-name="Path 2055" d="M11.091,126.07H5.539l-1.211-.95H0v8.744a1.32,1.32,0,0,0,1.277,1.312l9.614.005h0a1.3,1.3,0,0,0,1.248-.954l1.733-6.386H11.091Zm-9.714,8.291H1.293a.506.506,0,0,1-.478-.5v-7.929H4.046l1.211.95h5.019v.956H3.638l-1.632,6.008A.692.692,0,0,1,1.377,134.361Zm11.431-5.7-1.454,5.357a.479.479,0,0,1-.461.353h0l-8.215,0a1.525,1.525,0,0,0,.116-.3l1.469-5.407Z" transform="translate(0 -122.144)" fill="#7367f0"/>
+                                                                <path id="Path_2056" data-name="Path 2056" d="M268.117,16.4a2,2,0,0,1,1.917,1.448l-.483-.375-.5.644,1.467,1.14,1.467-1.14-.5-.644-.6.464a2.808,2.808,0,0,0-5.579.457h.815A2,2,0,0,1,268.117,16.4Z" transform="translate(-258.1 -15.584)" fill="#7367f0"/>
+                                                                <path id="Path_2057" data-name="Path 2057" d="M0,0H.815V4.921H0Z" transform="translate(5.094 11.401) rotate(-89.943)" fill="#7367f0"/>
+                                                            </svg>
+  
+                                                        </div>
+                                                    </a>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <a href="{{service.dir}}/new-customer?id={{list[i].UserId}}"> 
+                                                        <div class="action-icon">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="13.632" height="13.467" viewBox="0 0 13.632 13.467">
+                                                                <g id="edit" transform="translate(0.15 0.15)">
+                                                                    <path id="Path_2058" data-name="Path 2058" d="M12.214,46.153a.33.33,0,0,0-.33.33v2.926a.99.99,0,0,1-.989.989H1.648a.99.99,0,0,1-.989-.989V40.82a.99.99,0,0,1,.989-.989H4.574a.33.33,0,1,0,0-.659H1.648A1.65,1.65,0,0,0,0,40.82v8.589a1.65,1.65,0,0,0,1.648,1.648H10.9a1.65,1.65,0,0,0,1.648-1.648V46.482A.33.33,0,0,0,12.214,46.153Zm0,0" transform="translate(0 -37.89)" fill="#7367f0" stroke="#7367f0" stroke-width="0.3"/>
+                                                                    <path id="Path_2059" data-name="Path 2059" d="M117.038.7a1.483,1.483,0,0,0-2.1,0l-5.88,5.88a.33.33,0,0,0-.085.145L108.2,9.512a.33.33,0,0,0,.406.406l2.792-.773a.33.33,0,0,0,.145-.085l5.88-5.88a1.485,1.485,0,0,0,0-2.1Zm-7.259,6.094,4.812-4.812,1.552,1.552L111.33,8.341Zm-.31.622,1.24,1.24-1.715.475Zm7.49-4.7-.35.35-1.552-1.552.35-.35a.824.824,0,0,1,1.165,0l.387.387A.825.825,0,0,1,116.958,2.713Zm0,0" transform="translate(-104.624 -0.261)" fill="#7367f0" stroke="#7367f0" stroke-width="0.3"/>
+                                                                </g>
+                                                            </svg>
+  
+                                                        </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <div (click)="delete(list[i].UserId)"  class="action-icon">
+                                                            <svg id="trash" xmlns="http://www.w3.org/2000/svg" width="10.876" height="13.317" viewBox="0 0 10.876 13.317">
+                                                                <path id="Path_2060" data-name="Path 2060" d="M10.842,2.976l-.294-.881a.82.82,0,0,0-.779-.561H7.3v-.8A.73.73,0,0,0,6.569,0H4.306a.73.73,0,0,0-.729.729v.8H1.106a.82.82,0,0,0-.779.561l-.294.881a.66.66,0,0,0,.626.869H.967l.676,8.365a1.21,1.21,0,0,0,1.2,1.107H8.171a1.21,1.21,0,0,0,1.2-1.107l.676-8.365h.17a.66.66,0,0,0,.626-.869ZM4.358.78h2.16v.754H4.358ZM8.592,12.147a.426.426,0,0,1-.421.39H2.842a.426.426,0,0,1-.421-.39l-.671-8.3H9.263ZM.827,3.064l.241-.723a.041.041,0,0,1,.039-.028H9.77a.041.041,0,0,1,.039.028l.241.723Zm0,0" transform="translate(0 0)" fill="#7367f0"/>
+                                                                <path id="Path_2061" data-name="Path 2061" d="M268.666,173.389h.021a.39.39,0,0,0,.389-.37l.366-7.033a.39.39,0,1,0-.779-.041l-.366,7.033A.39.39,0,0,0,268.666,173.389Zm0,0" transform="translate(-261.318 -161.27)" fill="#7367f0"/>
+                                                                <path id="Path_2062" data-name="Path 2062" d="M106.178,173.023a.39.39,0,0,0,.389.369h.022a.39.39,0,0,0,.368-.411l-.384-7.033a.39.39,0,1,0-.779.042Zm0,0" transform="translate(-103.042 -161.272)" fill="#7367f0"/>
+                                                                <path id="Path_2063" data-name="Path 2063" d="M194.644,173.392a.39.39,0,0,0,.39-.39v-7.033a.39.39,0,0,0-.78,0V173A.39.39,0,0,0,194.644,173.392Zm0,0" transform="translate(-189.202 -161.272)" fill="#7367f0"/>
+                                                            </svg>
+  
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            </tr>
+                                            </tbody>
+                                  </table>
+                              </div>
+                              <div class="row" id="pagination-color">
+                                  <div class="col-12 text-right">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination pagination-success justify-content-end mt-2">
+                                            <li *ngIf="currentPage != 0"  class="page-item previous"><a class="page-link" >
+                                                <i class="bx bx-chevron-left"></i>
+                                            </a></li>
+                                            <div *ngFor="let item of pages ; let curpage = index;">  
+                                            <li  *ngIf="curpage != this.currentPage"  class="page-item"    (click)="setCurrentPage(curpage)"><a  class="page-link" >{{curpage}}</a></li>
+                                            <li *ngIf="curpage == this.currentPage"  class="page-item active" aria-current="page"  (click)="setCurrentPage(curpage)"><a class="page-link" >{{curpage}}</a></li>
+                                            </div>
+                                            <li *ngIf="currentPage != pages[pages.length-1]"  class="page-item next"><a class="page-link" >
+                                                <i class="bx bx-chevron-right"></i>
+                                            </a></li>
+                                        </ul>
+                                    </nav>
+                                  </div>
+                              </div>
+                          </div>
+                          <!-- datatable ends -->
+                      </div>
+                  </section>
+                  <!-- table Transactions end -->
+
+              </div>
+          </div>
+
+          
+      </div>
+    </div>
+</div>
+<!-- END: Content-->
+
+
+<div class="sidenav-overlay"></div>
+<div class="drag-target"></div>
+
+<!-- BEGIN: Footer-->
+<footer class="footer footer-static footer-light">
+    <p class="clearfix mb-0">
+        <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="bx bx-up-arrow-alt"></i></button>
+    </p>
+</footer>
+<!-- END: Footer-->

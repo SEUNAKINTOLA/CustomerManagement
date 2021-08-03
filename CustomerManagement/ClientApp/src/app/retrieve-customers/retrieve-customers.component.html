@@ -1,0 +1,140 @@
+<app-nav-menu> </app-nav-menu>
+<!-- BEGIN: Content-->
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="content-wrapper">
+      <div class="row">
+          <div class="col-xl-12 col-md-12 col-12">
+              <div class="content-header row">
+                  
+                  <div class="content-header-left col-12  mt-1">
+                      <div class="row breadcrumbs-top">
+                          
+                        
+                        <div class="col-lg-6 col-md-12 col-12">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 col-12 pr-0 ">
+                                    <h5 class="content-header-title pr-1 mb-sm-5">Customer List</h5>
+                                </div>
+                                <div class="col-lg-8 col-md-6 col-12">
+                                    <form (ngSubmit)="SearchCustomer()">
+                                      <fieldset class="form-group position-relative has-icon-left">
+                                          <input  name="searchKeyWord"  [(ngModel)]="searchKeyWord" type="search" class="form-control modified-input"  placeholder="Search for a customer">
+                                          <div class="form-control-position">
+                                              <i class="bx bx-search"></i>
+                                          </div>
+                                      </fieldset>
+                                  </form>
+                                </div>
+
+
+                            </div>
+
+                           </div>
+
+                      
+                           <div class="col-lg-6 col-md-12 col-12">
+                            <div class="row">
+                                <div class="col-lg-1 col-md-12 col-12"></div>
+                                <div class="col-lg-6 col-md-6 col-6 pr-0 ">
+                               </div>
+                                <div class="col-lg-5 col-md-6 col-6  text-right">
+                                 
+                                </div>
+                            </div>
+                         </div>
+
+
+
+                          </div>
+                      </div>
+                  </div>
+                  <div class="content-body">
+                      <!-- table Transactions start -->
+                      <section id="table-transactions">
+                          <div class="card">
+    
+                              <!-- datatable start -->
+                              <div class="card-body">
+                                  <div class="">
+                                      <table id="table-extended-transactions" class="table mb-0 modifiedTable">
+                                          <thead>
+                                          <tr>
+                                            <th><h6 style="color: #ea6309 !important;">UserName</h6></th>
+                                            <th><h6 style="color: #ea6309 !important;">FirstName</h6></th>
+                                            <th><h6 style="color: #ea6309 !important;">LastName</h6></th>
+                                            <th><h6 style="color: #ea6309 !important;">Photo</h6></th>
+                                            <th><h6 style="color: #ea6309 !important;">PhoneNumber</h6></th>
+                                            <th><h6 style="color: #ea6309 !important;">Date Added</h6></th>
+                                              <th class="hidden-xs no-sort"></th>
+                                          </tr>
+                                          </thead>
+                                          
+                                          <tbody>
+                                            <tr *ngFor="let hero of list ; let i = index;">
+                                                <td class="hidden-xs"><h6> {{list[i].UserName}}</h6></td>
+                                            <td><h6 >{{list[i].FirstName}}</h6></td>
+                                            <td><h6>{{list[i].LastName}}</h6></td>
+                                            <td class="hidden-xs">  <a target="new" href="{{list[i].PicturePathOrUrl}}">{{list[i].PicturePathOrUrl}} </a> </td>
+                                            <td><h6>{{list[i].PhoneNumber}}</h6></td>
+                                            <td><span class="badge badge-pill badge-light-success"><h6>{{list[i].DateCreated}}</h6></span></td>
+                                             <td class="hidden-xs">
+                                                    <div class="row">
+                                                        <div class="col-12">
+    
+                                                            <a (click)="retrieveCustomer(list[i].UserId)" class="btn btn-block btn-violet btn-modified2 text-center round mr-1 mb-1"> Retrieve Customer </a>
+    
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                </tr>
+                                                </tbody>
+                                      </table>
+                                  </div>
+                                  <div class="row" id="pagination-color">
+                                      <div class="col-12 text-right">
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination pagination-success justify-content-end mt-2">
+                                                <li *ngIf="currentPage != 0"  class="page-item previous"><a class="page-link" >
+                                                    <i class="bx bx-chevron-left"></i>
+                                                </a></li>
+                                                <div *ngFor="let item of pages ; let curpage = index;">  
+                                                <li  *ngIf="curpage != this.currentPage"  class="page-item"    (click)="setCurrentPage(curpage)"><a  class="page-link" >{{curpage}}</a></li>
+                                                <li *ngIf="curpage == this.currentPage"  class="page-item active" aria-current="page"  (click)="setCurrentPage(curpage)"><a class="page-link" >{{curpage}}</a></li>
+                                                </div>
+                                                <li *ngIf="currentPage != pages[pages.length-1]"  class="page-item next"><a class="page-link" >
+                                                    <i class="bx bx-chevron-right"></i>
+                                                </a></li>
+                                            </ul>
+                                        </nav>
+                                      </div>
+                                  </div>
+                              </div>
+                              <!-- datatable ends -->
+                          </div>
+                      </section>
+                      <!-- table Transactions end -->
+    
+                  </div>
+          </div>
+
+          
+          
+      </div>
+    </div>
+</div>
+<!-- END: Content-->
+
+
+<div class="sidenav-overlay"></div>
+<div class="drag-target"></div>
+
+<!-- BEGIN: Footer-->
+<footer class="footer footer-static footer-light">
+    <p class="clearfix mb-0">
+        <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="bx bx-up-arrow-alt"></i></button>
+    </p>
+</footer>
+<!-- END: Footer-->

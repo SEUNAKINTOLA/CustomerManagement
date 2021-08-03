@@ -1,0 +1,191 @@
+<app-nav-menu> </app-nav-menu>
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="content-wrapper">
+            <div class="row">
+    
+                <div class="col-6">
+                    <a href="{{service.dir}}/customers" type="button" class="btn btn-violet btn-modified back-btn round mr-1 mb-1 "><i class="bx bx-chevron-left"></i> Back</a>
+
+                    <br>
+                    <br>
+                </div>
+                <div class="col-xl-12 col-md-12 col-12">
+                    <div class="content-header-left col-12 mb-2 mt-1">
+                        <div class="row breadcrumbs-top">
+                            
+                            <div class="row">
+                                <div class="col-md-4 col-6 pl-0 pr-0">
+                                    <fieldset class="form-group position-relative">
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12 pr-0 ">
+                                        <a href="{{service.dir}}/new-customer?id={{var1}}">     <h5 class="content-header-title pr-1 mb-0">Edit Customer</h5> </a>
+                                    </div>
+                                </div>
+    
+                            </div>
+    
+                        </div>
+                    </div>
+    
+                    <div class="content-body">
+                       <section class="pl-1 mt-3">
+                           <div class="row">
+                               <div class="col-xl-2 col-md-6 col-6">
+                                   <div class="tab-title active-tab-title" id="tab-title1">
+                                       <h6>Customer Details</h6>
+                                   </div>
+                               </div>
+                           </div>
+                       </section>
+    
+                        <section id="form-tabs-">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card icon-tab">
+                                        <div class="card-content mt-2">
+                                            <div class="card-body">
+                                                    <section id="step-1" class="step">
+                                                        <div class="row">
+                                                            
+                                                            <img style="max-width: 100%" src="{{service.formDataToSubmit.PicturePathOrUrl}}"> 
+                                                        </div>
+                                                        <div class="row mt-2">
+    
+                                                            <div class="col-xl-4">
+    
+                                                                <div >
+                                                                    <label>First Name </label>
+                                                                  <h3>  {{service.formDataToSubmit.FirstName}}</h3>
+                                                                 </div>
+                                                            </div>
+                                                            <div class="col-xl-4">
+                                                                <div >
+                                                                    <label>Last Name </label>
+                                                                    <h3>    {{service.formDataToSubmit.LastName}}</h3>
+                                                                 </div>
+                                                            </div>
+                                                            <div class="col-xl-4">
+                                                                <div >
+                                                                    <label>Phone Number</label>     
+                                                                    <h3>     {{service.formDataToSubmit.PhoneNumber}}</h3>
+                                                                   
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+
+                                                        <div class="row mt-2">
+                                                            <div class="col-xl-4">
+                                                            <div class="form-group">
+                                                                <label> Email Address </label>
+                                                                <h3>  {{service.formDataToSubmit.EmailAddress}}</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-4">
+                                                                <div class="form-group">
+                                                                    <label>Date Created </label>
+                                                                    <h3>   {{service.formDataToSubmit.DateCreated}} </h3>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-4">
+                                                                <div class="form-group">
+                                                                    <label>Last Modified Date</label>     
+                                                                    <h3>    {{service.formDataToSubmit.LastModifiedDate}}  </h3>
+                                                                   
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+
+                                                        <div class="row mt-2">
+    
+                                                            <div class="col-xl-4">
+    
+                                                                <div class="form-group">
+                                                                    <label>AddressLine1 </label>
+                                                                    <h3>   {{service.formDataToSubmit.AddressLine1}}  </h3>
+                                                                  </div>
+                                                            </div>
+                                                            <div class="col-xl-4">
+                                                                <div class="form-group">
+                                                                    <label>AddressLine2</label>
+                                                                    <h3>  {{service.formDataToSubmit.AddressLine2}}  </h3>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+
+                                                        <div class="row mt-2">
+                                                            <div class="col-xl-4">
+                                                                <div class="form-group">
+                                                                    <label>State </label>
+                                                                    <h3>    {{service.formDataToSubmit.StateName}}   </h3>
+                                                                 </div>
+                                                            </div>
+                                                            <div class="col-xl-4">
+                                                                <div class="form-group">
+                                                                    <label>Country  </label>     
+                                                                    <h3>  {{CustomerCountry}}  </h3>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+
+                                                        <br>
+
+
+                                                        <div class="row mt-2">
+                                                            <div class="col-xl-12 col-md-12 col-12">
+                                                                <div class="form-group">
+                                                                    <label>Admin Comment </label>
+                                                                    <textarea disabled name="AdminComment" [(ngModel)]="service.formDataToSubmit.AdminComment" type="text" class="form-control" >
+                                                                        </textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <br>
+                                                        <div class="row mt-3">
+                                                            <div class="col-12 text-right">
+                                                                <button id="next1" type="button" class="btn btn-violet btn-modified round mr-1 mb-1 "> Next <i class="bx bx-chevron-right"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+
+                                                
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </section>
+    
+
+    
+                    </div>
+                </div>
+
+                
+            </div>
+    
+    
+        </div>
+    </div>
+    <!-- END: Content-->
+    
+    
+    
+    <!-- BEGIN: Footer-->
+    <footer class="footer footer-static footer-light">
+        <p class="clearfix mb-0">
+            <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="bx bx-up-arrow-alt"></i></button>
+        </p>
+    </footer>
+    <!-- END: Footer-->
+    

@@ -1,0 +1,8 @@
+<svg id="Group_2269" data-name="Group 2269" xmlns="http://www.w3.org/2000/svg" width="30" height="31" viewBox="0 0 30 31">
+  <ellipse id="Ellipse_1422" data-name="Ellipse 1422" cx="15" cy="15.5" rx="15" ry="15.5" fill="#efeefd"/>
+  <g id="folder" transform="translate(8.18 8.809)">
+    <path id="Path_2055" data-name="Path 2055" d="M11.091,126.07H5.539l-1.211-.95H0v8.744a1.32,1.32,0,0,0,1.277,1.312l9.614.005h0a1.3,1.3,0,0,0,1.248-.954l1.733-6.386H11.091Zm-9.714,8.291H1.293a.506.506,0,0,1-.478-.5v-7.929H4.046l1.211.95h5.019v.956H3.638l-1.632,6.008A.692.692,0,0,1,1.377,134.361Zm11.431-5.7-1.454,5.357a.479.479,0,0,1-.461.353h0l-8.215,0a1.525,1.525,0,0,0,.116-.3l1.469-5.407Z" transform="translate(0 -122.144)" fill="#7367f0"/>
+    <path id="Path_2056" data-name="Path 2056" d="M268.117,16.4a2,2,0,0,1,1.917,1.448l-.483-.375-.5.644,1.467,1.14,1.467-1.14-.5-.644-.6.464a2.808,2.808,0,0,0-5.579.457h.815A2,2,0,0,1,268.117,16.4Z" transform="translate(-258.1 -15.584)" fill="#7367f0"/>
+    <path id="Path_2057" data-name="Path 2057" d="M0,0H.815V4.921H0Z" transform="translate(5.094 11.401) rotate(-89.943)" fill="#7367f0"/>
+  </g>
+</svg>

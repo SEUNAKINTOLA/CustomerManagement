@@ -1,0 +1,203 @@
+<app-nav-menu> </app-nav-menu>
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="content-wrapper">
+            <div class="row">
+                <div class="col-xl-12 col-md-12 col-12">
+
+                    
+
+                    <div class="content-body">
+                       <section class="pl-1 mt-3">
+                           <div class="row">
+                               <div class="col-xl-2 col-md-6 col-6">
+                                   <div class="tab-title active-tab-title" id="tab-title1">
+                                       <h6>Customer Details</h6>
+                                   </div>
+                               </div>
+                           </div>
+                       </section>
+    
+                        <section id="form-tabs-">
+              
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card icon-tab">
+                                        <div class="card-content mt-2">
+                                            <div class="card-body">
+                                                <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+                                                    <section id="step-1" class="step">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <p>* Please fill all required fields</p>
+                                                            </div>
+                                                        </div>
+
+                                                                      
+                                                        <div class="wrapper center-block">
+                                                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                                            <div class="panel panel-default">
+                                                      
+                                                          
+                                                            
+                                                        <div class="row mt-2">
+    
+                                                            <div class="col-xl-4 col-md-6 col-12">
+    
+                                                                <div class="form-group">
+                                                                    <label>UserName *</label>
+                                                                    <input name="CustomerName" #CustomerName="ngModel" [(ngModel)]="service.formDataToSubmit.UserName" type="text" class="form-control" >
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-4 col-md-6 col-12 align-self-end">
+                                                                <div class="form-group">
+                                                                    <label>FirstName *</label>
+                                                                    <input name="FirstName" #FirstName="ngModel" [(ngModel)]="service.formDataToSubmit.FirstName" type="text" class="form-control" >
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-4 col-md-6 col-12 align-self-end">
+                                                                <div class="form-group">
+                                                                    <label>LastName *</label>     
+                                                                     <input name="LastName"  [(ngModel)]="service.formDataToSubmit.LastName" type="text" class="form-control" >
+                                                              
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mt-2">
+    
+                                                            <div class="col-xl-4 col-md-6 col-12">
+    
+                                                                <div class="form-group">
+                                                                    <label>Phone Number </label>
+                                                                    <input name="PhoneNumber" [(ngModel)]="service.formDataToSubmit.PhoneNumber" type="text" class="form-control" >
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-4 col-md-6 col-12 align-self-end">
+                                                                <div class="form-group">
+                                                                    <label>EmailAddress</label>
+                                                                    <input name="EmailAddress"  [(ngModel)]="service.formDataToSubmit.EmailAddress" type="text" class="form-control" >
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-4 col-md-6 col-12 align-self-end">
+                                                                <div class="form-group">
+                                                                    <label>Picture Url </label>     
+                                                                     <input name="PicturePathOrUrl"  [(ngModel)]="service.formDataToSubmit.PicturePathOrUrl" type="text" class="form-control" >
+                                                              
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mt-2">
+    
+                                
+                                                            <div class="col-xl-6 col-md-6 col-12 align-self-end">
+                                                                <div class="form-group">
+                                                                    <label>AddressLine1</label>
+                                                                    <input name="AddressLine1"  [(ngModel)]="service.formDataToSubmit.AddressLine1" type="text" class="form-control" >
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-6 col-md-6 col-12 align-self-end">
+                                                                <div class="form-group">
+                                                                    <label>AddressLine2</label>     
+                                                                     <input name="AddressLine2"  [(ngModel)]="service.formDataToSubmit.AddressLine2" type="text" class="form-control" >
+                                                              
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        
+                                                        <div class="row mt-2">
+                                                            <div class="col-xl-6 col-md-6 col-12">
+                                                                <div class="form-group">
+                                                                    <label>State </label>
+                                                                    <input name="StateName" [(ngModel)]="service.formDataToSubmit.StateName" type="text" class="form-control" >
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-6 col-md-6 col-12 align-self-end">
+                                                                <div class="form-group">
+                                                                    <label>Country  *</label>
+                                                                    <select  [(ngModel)]="service.formDataToSubmit.CountryId" name="Country" class="form-control">
+                                                                      <option  *ngFor="let item of country; let i = index" value="{{country[i].CountryId}}" >{{country[i].CountryName}}</option>
+                                                                  </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mt-2">
+                                                            <div class="col-xl-12 col-md-12 col-12">
+                                                                <div class="form-group">
+                                                                    <label>Your Comment </label>
+                                                                    <textarea name="AdminComment" [(ngModel)]="service.formDataToSubmit.AdminComment" type="text" class="form-control" >
+                                                                        </textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                            </div>
+                                                      
+
+                                                        </div>
+
+                                                        
+
+                                                       
+                                                        <div class="row mt-3">
+                                                            <div class="col-6">
+                                                                <button id="back2" type="button" class="btn btn-violet btn-modified back-btn round mr-1 mb-1 "><i class="bx bx-chevron-left"></i> Back</button>
+      
+                                                            </div>
+                                                            <div class="col-6 text-right">
+                                                                <button type="submit" [disabled]="form.invalid" class="btn btn-violet btn-modified round mr-1 mb-1 "> Submit <i class="bx bx-chevron-right"></i></button>
+                                                            </div>
+    
+                                                            <div *ngIf="errors.length > 0" class="alert alert-danger" role="alert">
+                                                                <strong>Oops!</strong> 
+                                                                <span  *ngFor="let item of errors" > <br>   {{item}}</span>
+                                                            </div>
+    
+                                                            <div *ngIf="success.length > 0" class="alert" role="alert alert-success">
+                                                                <strong>Success!</strong> 
+                                                                <span  *ngFor="let item of success" > <br>   {{item}}</span>
+                                                            </div>
+
+                                                        </div>
+                                                        </div>
+                                                    </section>
+    
+                                                </form>
+    
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </section>
+    
+    
+    
+                    </div>
+                </div>
+                
+
+
+                
+
+            </div>
+    
+    
+        </div>
+    </div>
+    <!-- END: Content-->
+    
+    
+    
+    <!-- BEGIN: Footer-->
+    <footer class="footer footer-static footer-light">
+        <p class="clearfix mb-0">
+            <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="bx bx-up-arrow-alt"></i></button>
+        </p>
+    </footer>
+    <!-- END: Footer-->
+    
