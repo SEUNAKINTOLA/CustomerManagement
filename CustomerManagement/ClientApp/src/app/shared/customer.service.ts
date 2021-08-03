@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient } from "./http";
 import { Guid } from "guid-typescript";
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
