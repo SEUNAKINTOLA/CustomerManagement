@@ -17,10 +17,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using CustomerManagement.Data;
 using CustomerManagement.Models;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using WebApi.Helpers;
 
 namespace CustomerManagement
 {
@@ -39,13 +35,14 @@ namespace CustomerManagement
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSwaggerGen();
             services.AddCors(options =>
             {
                 options.AddPolicy(name: MyAllowSpecificOrigins,
                                   builder =>
                                   {
-                                      builder.WithOrigins("http://CustomerManagement.com",
-                                                          "https://CustomerManagement.com")
+                                      builder.WithOrigins("http://CustomerManagement.internautical.com",
+                                                          "https://CustomerManagement.internautical.com")
                                                             .AllowAnyHeader()
                                                             .AllowAnyMethod();
                                   });
@@ -55,15 +52,14 @@ namespace CustomerManagement
             options.UseSqlServer(Configuration.GetConnectionString("MainDbConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
 
             // api user claim policy
-            //   services.AddAuthorization(options =>
-            //   {
-            //    options.AddPolicy("ApiUser", policy => policy.RequireClaim(""));
-            //  });
-
-
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("ApiUser", policy => policy.RequireClaim(""));
+            });
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings
@@ -98,8 +94,8 @@ namespace CustomerManagement
                 };
             });
 
-            services.AddControllers().
-                 AddJsonOptions(opts => opts.JsonSerializerOptions.PropertyNamingPolicy = null);
+           services.AddControllers().
+                AddJsonOptions(opts => opts.JsonSerializerOptions.PropertyNamingPolicy = null);
 
             services.AddResponseCompression(opts =>
             {
@@ -119,6 +115,14 @@ namespace CustomerManagement
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseCors(MyAllowSpecificOrigins);
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
 
             // UseStatusCodePagesWithReExecute(app, "/", null);
@@ -132,7 +136,7 @@ namespace CustomerManagement
                 app.UseDeveloperExceptionPage();
                 // app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                // app.UseHsts();
+               // app.UseHsts();
             }
 
             app.UseHttpsRedirection();
@@ -144,12 +148,14 @@ namespace CustomerManagement
 
             app.UseRouting();
 
-            // app.UseAuthentication();
-            //  app.UseAuthorization();
-            app.UseMiddleware<JwtMiddleware>();
-
-            app.UseEndpoints(x => x.MapControllers());
-
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller}/{action=Index}/{id?}");
+            });
 
             app.UseSpa(spa =>
             {
