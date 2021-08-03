@@ -10,7 +10,6 @@ import { DateTimePickerModule } from "@syncfusion/ej2-angular-calendars";
 /* Account Imports */
 import { AccountModule }  from './account/account.module';
 
-import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
 import { NewCustomerComponent } from './new-customer/new-customer.component';
 import { ConfigService } from './shared/utils/config.service';
@@ -33,13 +32,12 @@ import { RetrieveCustomersComponent } from './retrieve-customers/retrieve-custom
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
     RouterModule.forRoot([
-      { path: 'new-customer', component: NewCustomerComponent },
-      { path: '', component: Customers, pathMatch: 'full' },
-      { path: 'customer-details', component: CustomerDetailsComponent},
-      { path: 'retrieve-customers', component: RetrieveCustomersComponent}
-    ])
+    { path: 'new-customer', component: NewCustomerComponent },
+    { path: '', component: Customers, pathMatch: 'full' },
+    { path: 'customer-details', component: CustomerDetailsComponent },
+    { path: 'retrieve-customers', component: RetrieveCustomersComponent }
+], { relativeLinkResolution: 'legacy' })
   ],
   providers:    [ UserService,ConfigService ],
   bootstrap: [AppComponent]

@@ -1,7 +1,6 @@
 import { CustomerService } from './../shared/customer.service';
 import { Component, OnInit,Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {Subscription} from 'rxjs';
 import { UserService } from '../shared/services/user.service';
@@ -13,8 +12,7 @@ import { CustomerView,CustomerDetails,CustomerPhoto,country,state,Customer } fro
 })
 @Injectable()
 export class CustomerDetailsComponent implements OnInit {
-  constructor( private route: ActivatedRoute, private service: CustomerService,
-    private toastr: ToastrService,private router: Router) { }
+  constructor( private route: ActivatedRoute, private service: CustomerService,private router: Router) { }
 
     
   status: boolean;
@@ -25,17 +23,16 @@ export class CustomerDetailsComponent implements OnInit {
     this.subscription = this.service.currentPageNum$.subscribe(pagenum => {
       this.currentPage = pagenum;
     });
-   this.toastr.success('Submitted successfully', 'New Customer');
     this.resetForm();
     
     this.service.getCountries().subscribe(
       res => {
-        this.country  = res as country;
+        this.country  = res as unknown as country;
 
         
       this.service.getStates().subscribe(
         res => {
-          this.state  = res as state;
+          this.state  = res as unknown as state;
         });
 
         this.sub = this.route.queryParams.subscribe((params: Params) => {
@@ -86,7 +83,7 @@ export class CustomerDetailsComponent implements OnInit {
     this.service.getCustomerById(id)
     .toPromise()
     .then(res => {
-        this.service.formDataToSubmit = res as  CustomerView;
+        this.service.formDataToSubmit = res as unknown as  CustomerView;
         this.CustomerCountry = this.country.filter(p => p.CountryId == this.service.formDataToSubmit.CountryId)[0].CountryName;
       },
       err => {

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ForgotPassComponent } from './forgot-pass.component';
 
@@ -6,7 +6,7 @@ describe('ForgotPassComponent', () => {
   let component: ForgotPassComponent;
   let fixture: ComponentFixture<ForgotPassComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ForgotPassComponent ]
     })
