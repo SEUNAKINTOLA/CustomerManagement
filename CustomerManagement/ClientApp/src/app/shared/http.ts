@@ -14,17 +14,16 @@ import { HttpClient as  Http,HttpHeaders } from "@angular/common/http";
 
   get(url) {
     let headers = new HttpHeaders();
-    this.createAuthorizationHeader(headers);
+    //this.createAuthorizationHeader(headers);
     headers = headers.append('Authorization', ' Bearer ' + this.token); 
-
-    // headers.set('Authorization', ' Bearer  dffdfdfd'); 
     return this.http.get(url, {
       'headers': headers
     });
   }
   delete(url) {
-    let headers = new HttpHeaders();
-    this.createAuthorizationHeader(headers);
+    let headers = new HttpHeaders();  
+      headers = headers.append('Authorization', ' Bearer ' + this.token); 
+
     return this.http.delete(url, {
       'headers': headers
     });
@@ -33,14 +32,14 @@ import { HttpClient as  Http,HttpHeaders } from "@angular/common/http";
 
   put(url, data) {
     let headers = new HttpHeaders();
-    this.createAuthorizationHeader(headers);
+    headers = headers.append('Authorization', ' Bearer ' + this.token); 
     return this.http.put(url, data, {
       'headers': headers
     });
   }
   post(url, data) {
     let headers = new HttpHeaders();
-    this.createAuthorizationHeader(headers);
+    headers = headers.append('Authorization', ' Bearer ' + this.token); 
     return this.http.post(url, data, {
       'headers': headers
     });
