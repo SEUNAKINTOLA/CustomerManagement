@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "./http";
+import { HttpClient2 } from "./http";
 import { Guid } from "guid-typescript";
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
@@ -28,7 +28,9 @@ export class CustomerService {
 
   readonly rootURL = 'http://localhost:57621/api';
   list : CustomerView[];
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient2) {
+    
+   }
 
 
   

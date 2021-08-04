@@ -17,6 +17,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CustomerManagement.Data;
 using CustomerManagement.Models;
+using WebApi.Helpers;
 
 namespace CustomerManagement
 {
@@ -149,7 +150,9 @@ namespace CustomerManagement
             app.UseRouting();
 
             app.UseAuthentication();
-            app.UseAuthorization();
+            // app.UseAuthorization();
+            app.UseMiddleware<JwtMiddleware>();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

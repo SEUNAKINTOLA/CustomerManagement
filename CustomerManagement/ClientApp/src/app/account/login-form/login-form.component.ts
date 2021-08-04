@@ -72,6 +72,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
                   localStorage.setItem('lastname', this.list.LastName);
                   this.userService.loggedIn = true;
                   this.userService._authNavStatusSource.next(true);    
+                  console.log(localStorage.getItem('auth_token'));
                   this.router.navigate(['/']); 
                 }        
               
