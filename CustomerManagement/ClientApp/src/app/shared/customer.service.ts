@@ -28,7 +28,9 @@ export class CustomerService {
 
   readonly rootURL = 'http://localhost:57621/api';
   list : CustomerView[];
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    
+   }
 
 
   

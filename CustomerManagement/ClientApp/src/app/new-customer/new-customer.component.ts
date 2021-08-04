@@ -1,7 +1,6 @@
 import { CustomerService } from './../shared/customer.service';
 import { Component, OnInit,Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
 import * as $ from "jquery";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { CustomerView,CustomerDetails,CustomerPhoto,country,state,Customer } from './../shared/models/customerparameters.interface';
@@ -12,45 +11,43 @@ import { CustomerView,CustomerDetails,CustomerPhoto,country,state,Customer } fro
 })
 @Injectable()
 export class NewCustomerComponent implements OnInit {
-  constructor( private route: ActivatedRoute, private service: CustomerService,
-    private toastr: ToastrService,private router: Router) { }
-
-  ngOnInit() {
-   this.toastr.success('Submitted successfully', 'New Customer');
-   this.service.resetAllForms()
-    
-    console.log(this.service.formDataToSubmit);
-    this.service.getCountries().subscribe(
-      res => {
-        this.country  = res as country;
-      });
-
-      this.service.getStates().subscribe(
-        res => {
-          this.state  = res as state;
-        });
+  constructor( private route: ActivatedRoute, private service: CustomerService,private router: Router) { }
 
 
-    this.sub = this.route.queryParams.subscribe((params: Params) => {
-      this.var1 = params['id'];
-     if(this.var1 != undefined) this.getcustomerbyId(this.var1);
-      console.log(this.var1);
-    });
 
-  }
-
-
-  country;
+  country : country;
   state:state;
   sub;
   var1;
   errors:string[] = [];
   success:string[] = [];
-
+  ngOnInit() {
+    this.service.resetAllForms()
+     
+     console.log(this.service.formDataToSubmit);
+     this.service.getCountries().subscribe(
+       res => {
+         this.country  = res as unknown as country;
+       });
+ 
+       this.service.getStates().subscribe(
+         res => {
+           this.state  = res as unknown as state;
+         });
+ 
+ 
+     this.sub = this.route.queryParams.subscribe((params: Params) => {
+       this.var1 = params['id'];
+      if(this.var1 != undefined) this.getcustomerbyId(this.var1);
+       console.log(this.var1);
+     });
+ 
+   }
+ 
   getcustomerbyId(id){
     this.service.getCustomerById(id).subscribe(
       res => {
-        this.service.formDataToSubmit = res as  CustomerView;
+        this.service.formDataToSubmit = res as unknown as  CustomerView;
       },
       err => {
         console.log(err);
@@ -78,7 +75,6 @@ export class NewCustomerComponent implements OnInit {
       this.success = [];
       this.success.splice(0, 1);
       this.success.push("New Customer successfully added");
-        this.toastr.success('Submitted successfully', 'New Customer');
       },
       err => {
         this.errors = [];
@@ -100,7 +96,6 @@ export class NewCustomerComponent implements OnInit {
         this.success = [];
         this.success.splice(0, 1);
         this.success.push("New Customer successfully added");
-          this.toastr.success('Submitted successfully', 'New Customer');
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.router.onSameUrlNavigation = 'reload';
         this.router.navigate(['/']);

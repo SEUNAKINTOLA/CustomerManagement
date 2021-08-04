@@ -60,7 +60,7 @@ getCustomersPaginated(count,start){
   this.list = [];
   this.service.getDelCustomersPaginated(count,start*10).subscribe(
     res => {
-      this.list = res as [];
+      this.list = res as unknown as [];
       console.log(this.list);
       this.getCustomersCount();
     },
