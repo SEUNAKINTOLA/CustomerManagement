@@ -1,16 +1,15 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using System.Data;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using iTextSharp.text.html.simpleparser;
 using System.Xml;
-using SendGrid;
-using SendGrid.Helpers.Mail;
 using Microsoft.Extensions.Configuration;
+using System.Net.Mail;
+using System.Net;
 
-public  class SendMail
+public class SendMail
 {
     private IConfiguration _config;
 
@@ -21,8 +20,8 @@ public  class SendMail
 
     public async System.Threading.Tasks.Task SendAdminComment(string content, string email, string name)
     {
-           await SendPDFEmailAsync(content, email,name);
-        
+        await SendPDFEmailAsync(content, email, name);
+
     }
 
     private async System.Threading.Tasks.Task SendPDFEmailAsync(string content, string email, string name)
@@ -65,23 +64,30 @@ public  class SendMail
                     byte[] bytes = memoryStream.ToArray();
                     memoryStream.Close();
 
+                    var password = _config.GetValue<String>("smtpPassword");
+                    var userName = _config.GetValue<String>("smtpUserName");
+                    var host = _config.GetValue<String>("smtpHost");
                     const string subject = "CM - Admin Message.";
                     var body = "<html><body>" +
                                "<h1>Please find attached.</h1>" +
                                "</body></html>";
 
-                    var apiKey = _config.GetValue<String>("SendGridKey");
-                    var client = new SendGridClient(apiKey);
-                    var msg = new SendGridMessage()
-                    {
-                        From = new EmailAddress("CustomerManagement@testingmail.com", "CustomerManagement"),
-                        Subject = subject,
-                        HtmlContent = body
-                    };
-                    msg.AddTo(new EmailAddress(email));
-                    var file = Convert.ToBase64String(bytes);
-                    msg.AddAttachment("Admin Message.pdf", file);
-                    var response = await client.SendEmailAsync(msg);
+                    MailMessage mm = new MailMessage("CustomerManagement@gmail.com", "CustomerManagement");
+                    mm.Subject = subject;
+                    mm.Body = body;
+                    mm.Attachments.Add(new Attachment(new MemoryStream(bytes), "AdminComment.pdf"));
+                    mm.IsBodyHtml = true;
+
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = host;
+                    smtp.EnableSsl = true;
+                    NetworkCredential networkCredential = new NetworkCredential();
+                    networkCredential.UserName = userName;
+                    networkCredential.Password = password;
+                    smtp.UseDefaultCredentials = true;
+                    smtp.Credentials = networkCredential;
+                    smtp.Port = 587;
+                    smtp.Send(mm);
                 }
             }
         }
